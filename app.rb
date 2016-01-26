@@ -8,12 +8,9 @@ get "/" do
   seconds_into_long_day = (now - a_midnight) % seconds_in_a_long_day
   seconds_into_normal_day = (seconds_into_long_day.to_f * (seconds_in_a_day.to_f / seconds_in_a_long_day.to_f)).to_i
 
-  puts "Seconds into long day: #{seconds_into_long_day}"
-  puts "Seconds into normal day: #{seconds_into_normal_day}"
-
   hours = (seconds_into_normal_day/60/60).to_i
   minutes = (seconds_into_normal_day/60).to_i % 60
   seconds = (seconds_into_normal_day) % 60
 
-  [hours, minutes, seconds].join(":")
+  "%02d:%02d:%02d" % [hours, minutes, seconds]
 end
