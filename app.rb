@@ -12,5 +12,7 @@ get "/" do
   minutes = (seconds_into_normal_day/60).to_i % 60
   seconds = (seconds_into_normal_day) % 60
 
-  "%02d:%02d:%02d" % [hours, minutes, seconds]
+  content_type :html
+
+  "<!DOCTYPE html><html><body><span style=\"text-align: center; font-size: 2em;\">%02d:%02d:%02d</span></body></html>" % [hours, minutes, seconds]
 end
