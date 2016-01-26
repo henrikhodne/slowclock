@@ -1,7 +1,6 @@
 require "sinatra"
 
-get "/" do
-  now = Time.now.to_i
+def make_time(now)
   a_midnight = ENV["A_MIDNIGHT"].to_i
   seconds_in_a_day = 24*60*60
   seconds_in_a_long_day = seconds_in_a_day + ENV["EXTRA_SECONDS"].to_i
@@ -12,7 +11,17 @@ get "/" do
   minutes = (seconds_into_normal_day/60).to_i % 60
   seconds = (seconds_into_normal_day) % 60
 
+  "%02d:%02d:%02d" % [hours, minutes, seconds]
+end
+
+get "/time.txt" do
+  content_type :txt
+
+  make_time(Time.now.to_i)
+end
+
+get "/" do
   content_type :html
 
-  "<!DOCTYPE html><html><body><span style=\"text-align: center; font-size: 2em;\">%02d:%02d:%02d</span></body></html>" % [hours, minutes, seconds]
+  "<!DOCTYPE html><html><body><span style=\"text-align: center; font-size: 2em;\">#{make_time(Time.now.to_i)}</span></body></html>"
 end
