@@ -23,5 +23,26 @@ end
 get "/" do
   content_type :html
 
-  "<!DOCTYPE html><html><body><span style=\"text-align: center; font-size: 2em;\">#{make_time(Time.now.to_i)}</span></body></html>"
+  @time = make_time(Time.now.to_i)
+
+  erb :time
 end
+
+__END__
+
+@@ time
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Henrik Time</title>
+    <style type="text/css">
+      .time {
+        text-align: center;
+        font-size: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="time"><%= @time %></span>
+  </body>
+</html>
